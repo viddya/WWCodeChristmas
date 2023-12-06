@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        unordered_map <char,char>map;
+        map = {{')','('}, {'}','{'}, {']','['}};
+        stack <char> st;
+        for(int i=0; i<s.size(); i++)
+        {
+            if((s[i] == '(') || (s[i] == '{') || (s[i] == '['))
+            {
+                st.push(s[i]);
+            }
+            else if(!st.empty())
+            {
+                if(map[s[i]] != st.top())
+                {
+                    return false;
+                }
+                st.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        if(st.empty())
+        {
+            return true;
+        }
+        return false; 
+    }
+};
